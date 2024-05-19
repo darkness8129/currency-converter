@@ -1,9 +1,8 @@
 package httpcontroller
 
 import (
-	"darkness8129/currency-converter/app/service"
-	"darkness8129/currency-converter/packages/errs"
-	"darkness8129/currency-converter/packages/logging"
+	"darkness8129/currency-converter/currency-service/app/service"
+	"darkness8129/currency-converter/currency-service/packages/logging"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -39,12 +38,6 @@ func (ctrl *currencyController) getRate(c *gin.Context) {
 
 	rate, err := ctrl.services.Currency.GetRate(c)
 	if err != nil {
-		if errs.IsCustom(err) {
-			logger.Info(err.Error())
-			c.AbortWithStatusJSON(http.StatusUnprocessableEntity, getRateError{err.Error()})
-			return
-		}
-
 		logger.Error("failed to get rate", "err", err)
 		c.AbortWithStatusJSON(http.StatusInternalServerError, getRateError{"internal server error"})
 		return

@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"darkness8129/currency-converter/packages/errs"
-	"darkness8129/currency-converter/packages/logging"
+	"darkness8129/currency-converter/currency-service/packages/errs"
+	"darkness8129/currency-converter/currency-service/packages/logging"
 	"fmt"
 )
 

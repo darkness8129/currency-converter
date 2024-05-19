@@ -1,8 +1,8 @@
 package httpcontroller
 
 import (
-	"darkness8129/currency-converter/app/service"
-	"darkness8129/currency-converter/packages/logging"
+	"darkness8129/currency-converter/subscription-service/app/service"
+	"darkness8129/currency-converter/subscription-service/packages/logging"
 
 	"fmt"
 	"net/http"
@@ -31,7 +31,7 @@ func New(opt Options) {
 		Services:    opt.Services,
 	}
 
-	newCurrencyController(controllerOpt)
+	newSubscriptionController(controllerOpt)
 }
 
 func corsMiddleware(c *gin.Context) {

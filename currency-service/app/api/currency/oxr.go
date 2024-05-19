@@ -2,9 +2,9 @@ package currapi
 
 import (
 	"context"
-	"darkness8129/currency-converter/app/service"
-	"darkness8129/currency-converter/config"
-	"darkness8129/currency-converter/packages/logging"
+	"darkness8129/currency-converter/currency-service/app/service"
+	"darkness8129/currency-converter/currency-service/config"
+	"darkness8129/currency-converter/currency-service/packages/logging"
 	"fmt"
 	"net/http"
 
@@ -54,6 +54,7 @@ func (a *oxrAPI) GetRate(ctx context.Context) (float64, error) {
 		logger.Error("failed to send get rate request", "err", err)
 		return 0, fmt.Errorf("failed to send get rate request: %w", err)
 	}
+	// TODO: parse errors and return custom
 	if res.StatusCode() != http.StatusOK {
 		logger.Error("failed to get rate", "resBody", res.String(), "statusCode", res.StatusCode())
 		return 0, fmt.Errorf("failed to get rate: http status %d, body %s", res.StatusCode(), res.String())

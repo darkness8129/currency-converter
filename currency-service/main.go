@@ -1,12 +1,12 @@
 package main
 
 import (
-	currapi "darkness8129/currency-converter/app/api/currency"
-	httpcontroller "darkness8129/currency-converter/app/controller/http"
-	"darkness8129/currency-converter/app/service"
-	"darkness8129/currency-converter/config"
-	"darkness8129/currency-converter/packages/httpserver"
-	"darkness8129/currency-converter/packages/logging"
+	currapi "darkness8129/currency-converter/currency-service/app/api/currency"
+	httpcontroller "darkness8129/currency-converter/currency-service/app/controller/http"
+	"darkness8129/currency-converter/currency-service/app/service"
+	"darkness8129/currency-converter/currency-service/config"
+	"darkness8129/currency-converter/currency-service/packages/httpserver"
+	"darkness8129/currency-converter/currency-service/packages/logging"
 
 	"log"
 	"os"
