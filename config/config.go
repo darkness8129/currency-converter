@@ -18,7 +18,7 @@ type (
 
 	App struct {
 		TestMode      bool          `env:"APP_TEST_MODE" env-default:"true"`
-		MailingPeriod time.Duration `env:"APP_MAILING_PERIOD" env-default:"5s"`
+		MailingPeriod time.Duration `env:"APP_MAILING_PERIOD" env-default:"24h"`
 	}
 
 	HTTP struct {

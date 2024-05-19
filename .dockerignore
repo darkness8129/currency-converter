@@ -1,0 +1,8 @@
+*
+!app
+!config
+!packages
+!go.mod
+!go.sum
+!main.go
+
