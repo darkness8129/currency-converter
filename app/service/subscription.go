@@ -89,6 +89,7 @@ func (s *subscriptionService) sendEmails(ctx context.Context) error {
 	}
 	logger.Debug("got subscribers", "subs", subs)
 
+	// TODO: divide into batches and do it concurrently
 	for _, sub := range subs {
 		err := s.apis.Email.Send(ctx, SendOpt{
 			To:      sub.Email,
