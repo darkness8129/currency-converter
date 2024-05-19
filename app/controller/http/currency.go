@@ -41,7 +41,7 @@ func (ctrl *currencyController) getRate(c *gin.Context) {
 	if err != nil {
 		if errs.IsCustom(err) {
 			logger.Info(err.Error())
-			c.AbortWithStatusJSON(http.StatusBadRequest, subscribeError{err.Error()})
+			c.AbortWithStatusJSON(http.StatusBadRequest, getRateError{err.Error()})
 			return
 		}
 
