@@ -7,8 +7,13 @@ type Services struct {
 }
 
 type CurrencyService interface {
-	GetRate(ctx context.Context, opt GetRateOpt) error
+	GetRate(ctx context.Context) (float64, error)
 }
 
-type GetRateOpt struct {
+type APIs struct {
+	Currency CurrencyAPI
+}
+
+type CurrencyAPI interface {
+	GetRate(ctx context.Context) (float64, error)
 }

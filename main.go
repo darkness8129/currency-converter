@@ -1,6 +1,7 @@
 package main
 
 import (
+	currapi "darkness8129/currency-converter/app/api/currency"
 	httpcontroller "darkness8129/currency-converter/app/controller/http"
 	"darkness8129/currency-converter/app/service"
 	"darkness8129/currency-converter/config"
@@ -25,8 +26,12 @@ func main() {
 		logger.Fatal("failed to get config", "err", err)
 	}
 
+	apis := service.APIs{
+		Currency: currapi.NewOxrAPI(logger, cfg),
+	}
+
 	services := service.Services{
-		Currency: service.NewCurrencyService(logger),
+		Currency: service.NewCurrencyService(logger, apis),
 	}
 
 	// init http server and start it

@@ -26,34 +26,30 @@ func newCurrencyController(opt controllerOptions) {
 	group.GET("/rate", panicHandler(logger, c.getRate))
 }
 
-type getRateRequestQuery struct {
+type getRateResponseBody struct {
+	Rate float64 `json:"rate"`
+}
+
+type getRateError struct {
+	Error string `json:"error"`
 }
 
 func (ctrl *currencyController) getRate(c *gin.Context) {
 	logger := ctrl.logger.Named("getRate")
 
-	var query getRateRequestQuery
-	err := c.ShouldBindQuery(&query)
-	if err != nil {
-		logger.Info("invalid request query", "err", err)
-		c.AbortWithStatusJSON(http.StatusBadRequest, nil)
-		return
-	}
-	logger.Debug("parsed request query", "query", query)
-
-	err = ctrl.services.Currency.GetRate(c, service.GetRateOpt{})
+	rate, err := ctrl.services.Currency.GetRate(c)
 	if err != nil {
 		if errs.IsCustom(err) {
 			logger.Info(err.Error())
-			c.AbortWithStatusJSON(http.StatusUnprocessableEntity, nil)
+			c.AbortWithStatusJSON(http.StatusUnprocessableEntity, getRateError{err.Error()})
 			return
 		}
 
 		logger.Error("failed to get rate", "err", err)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, nil)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, getRateError{"internal server error"})
 		return
 	}
 
-	logger.Info("successfully got rate")
-	c.JSON(http.StatusOK, nil)
+	logger.Info("successfully got rate", "rate", rate)
+	c.JSON(http.StatusOK, getRateResponseBody{rate})
 }
